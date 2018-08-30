@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TextFieldActivity">
+
+
+    <com.sayan.sample.materialdesigntest.customlayouts.customTextInputLayout
+        android:id="@+id/firstInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:helperText="* Required"
+        app:boxCollapsedPaddingTop="10dp"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.sayan.sample.materialdesigntest.customViews.CustomTextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="first hint*"
+            />
+    </com.sayan.sample.materialdesigntest.customlayouts.customTextInputLayout>
+
+
+    <com.sayan.sample.materialdesigntest.customlayouts.customTextInputLayout
+        android:id="@+id/secondInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.sayan.sample.materialdesigntest.customViews.CustomTextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="second hint" />
+    </com.sayan.sample.materialdesigntest.customlayouts.customTextInputLayout>
+
+</android.support.constraint.ConstraintLayout>

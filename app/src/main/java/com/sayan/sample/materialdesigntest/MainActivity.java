@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GridView gridView = findViewById(R.id.grid);
-        String[] buttons = {"TextField"};
+        String[] buttons = {"TextField", "Test"};
         gridView.setNumColumns(3);
         gridView.setAdapter(new MyGridAdapter(this, buttons));
     }
 
-    static class MyGridAdapter extends BaseAdapter{
+    static class MyGridAdapter extends BaseAdapter {
 
         private final MainActivity mainActivity;
         private final String[] buttons;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View view = mainActivity.getLayoutInflater().inflate(R.layout.main_grid_child, parent, false);
             String item = (String) getItem(position);
             Button gridChildButton = view.findViewById(R.id.gridChildButton);
@@ -58,7 +58,17 @@ public class MainActivity extends AppCompatActivity {
             gridChildButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    toNextPage(TextFieldActivity.class);
+                    switch (position) {
+                        case 0:
+                            toNextPage(TextFieldActivity.class);
+                            break;
+                        case 1:
+                            toNextPage(Test.class);
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
             });
             return view;

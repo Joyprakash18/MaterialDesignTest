@@ -3,22 +3,17 @@ package com.sayan.sample.materialdesigntest;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.auth.api.credentials.Credentials;
 import com.google.android.gms.auth.api.credentials.CredentialsClient;
 import com.google.android.gms.auth.api.credentials.CredentialsOptions;
 import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 
-public class Test extends AppCompatActivity {
+public class FetchCredentials extends AppCompatActivity {
 
     private static final int RESOLVE_HINT = 1001;
     private GoogleApiClient mGoogleApiClient;
@@ -26,7 +21,7 @@ public class Test extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_fetch_credentials);
         try {
             requestHint();
         } catch (IntentSender.SendIntentException e) {

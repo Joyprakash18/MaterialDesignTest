@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TextFieldActivity" />
-        <activity android:name=".Test"></activity>
+        <activity android:name=".FetchCredentials" />
+        <activity android:name=".InflaterTest"></activity>
     </application>
 
 </manifest>

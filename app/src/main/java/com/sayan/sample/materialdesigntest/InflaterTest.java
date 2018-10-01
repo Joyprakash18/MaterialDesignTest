@@ -15,6 +15,7 @@ public class InflaterTest extends AppCompatActivity {
         View linearLayout = findViewById(R.id.linearLayout);
         LayoutInflater layoutInflater = getLayoutInflater();
         for (int i = 0; i <= 10; i++)
-        layoutInflater.inflate(R.layout.child_inflater_test, (ViewGroup) linearLayout, true);
+        layoutInflater.inflate(R.layout.child_inflater_text, (ViewGroup) linearLayout, true);
+        layoutInflater.inflate(R.layout.child_inflater_button, (ViewGroup) linearLayout, true);
     }
 }

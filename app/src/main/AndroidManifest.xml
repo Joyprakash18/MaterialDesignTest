@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sayan.sample.materialdesigntest">
-
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +21,8 @@
         </activity>
         <activity android:name=".TextFieldActivity" />
         <activity android:name=".FetchCredentials" />
-        <activity android:name=".InflaterTest"></activity>
+        <activity android:name=".InflaterTest" />
+        <activity android:name=".RunningProcessActivity"></activity>
     </application>
 
 </manifest>

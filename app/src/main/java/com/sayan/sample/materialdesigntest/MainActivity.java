@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GridView gridView = findViewById(R.id.grid);
-        String[] buttons = {"TextField", "fetch credentials", "InflaterTest"};
+        String[] buttons = {"TextField", "fetch credentials", "InflaterTest", "Running Process Activity"};
         gridView.setNumColumns(3);
         gridView.setAdapter(new MyGridAdapter(this, buttons));
     }
@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 2:
                             toNextPage(InflaterTest.class);
+                            break;
+                        case 3:
+                            toNextPage(RunningProcessActivity.class);
                             break;
                         default:
                             break;

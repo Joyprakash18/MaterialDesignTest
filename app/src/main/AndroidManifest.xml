@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sayan.sample.materialdesigntest">
 
-    <uses-permission android:name="android.permission.DELETE_PACKAGES"
+    <uses-permission
+        android:name="android.permission.DELETE_PACKAGES"
         tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"
-        tools:ignore="ProtectedPermissions"
-        />
+    <uses-permission
+        android:name="android.permission.FORCE_STOP_PACKAGES"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
     <application
@@ -31,7 +32,8 @@
         <activity android:name=".TextFieldActivity" />
         <activity android:name=".FetchCredentials" />
         <activity android:name=".InflaterTest" />
-        <activity android:name=".RunningProcessActivity"></activity>
+        <activity android:name=".RunningProcessActivity" />
+        <activity android:name=".UnderstandingRSA"></activity>
     </application>
 
 </manifest>

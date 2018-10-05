@@ -18,9 +18,18 @@ public class UnderstandingRSA extends AppCompatActivity {
         int j = PrimeNumberGenerator.generateNextPrime(i);
         long multi = i * j;
         long lcm = LCMGenerator.findLCM(i - 1, j - 1);
-        long notDivisor = NumberNotDivisorPicker.pick(lcm);
+        int notDivisor = (int)NumberNotDivisorPicker.pick(lcm);
 //        inverseMOD(notDivisor, lcm);
-        int inverseMOD = inverseMOD(23, 2310);
+        int inverseMOD = inverseMOD(notDivisor, lcm);
+
+
+        //String public_key = (multi, notDivisor);     //(n, e)
+        //String private_key = (multi, inverseMOD);  //(n, d)
+
+        int message = 2;
+        double encrypted = Math.pow(message, notDivisor) % multi;
+
+        double decrypted = multi % Math.pow(encrypted, inverseMOD);
 
         Toast.makeText(this, "" + i, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "" + j, Toast.LENGTH_SHORT).show();
@@ -35,8 +44,8 @@ public class UnderstandingRSA extends AppCompatActivity {
     }
 
     static class PrimeNumberGenerator {
-        private static final int MAX_BOUND = 10000;
-        private static final int MIN_BOUND = 7000;
+        private static final int MAX_BOUND = 600;
+        private static final int MIN_BOUND = 500;
 
         static int generatePrime() {
             int num = 0;
@@ -85,7 +94,7 @@ public class UnderstandingRSA extends AppCompatActivity {
         static long pick(long number) {
             final Random rand = new Random(); // generate a random number
             //generate a randomNumber between half of the number and the number
-            long randomNumber = rand.nextInt((int) (number / 2)) + (int) number / 2;
+            long randomNumber = rand.nextInt(25 + 1 - 10) + 10;
             //check if randomNumber is a divisor of the number
             while ((number % randomNumber) == 0) {
                 randomNumber++;

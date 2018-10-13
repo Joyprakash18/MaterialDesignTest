@@ -33,7 +33,8 @@
         <activity android:name=".FetchCredentials" />
         <activity android:name=".InflaterTest" />
         <activity android:name=".RunningProcessActivity" />
-        <activity android:name=".UnderstandingRSA"></activity>
+        <activity android:name=".UnderstandingRSA" />
+        <activity android:name=".Main2Activity"></activity>
     </application>
 
 </manifest>

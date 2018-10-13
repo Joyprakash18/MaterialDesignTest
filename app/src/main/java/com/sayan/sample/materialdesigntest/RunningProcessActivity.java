@@ -7,8 +7,11 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
@@ -21,6 +24,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class RunningProcessActivity extends AppCompatActivity {
@@ -31,17 +35,18 @@ public class RunningProcessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running_proccess);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-            startActivityForResult(intent, REQUEST_CODE);
-        } else {
-            try {
-                List<ProcessModel> packages = fetchAllCurrentlyRunningProcessBeforeLollipop();
-                AsyncTask.execute(new MyProcessKillRunnable(packages, this));
-            } catch (PackageNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+//            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+//            startActivityForResult(intent, REQUEST_CODE);
+//        } else {
+//            try {
+//                List<ProcessModel> packages = fetchAllCurrentlyRunningProcessBeforeLollipop();
+//                AsyncTask.execute(new MyProcessKillRunnable(packages, this));
+//            } catch (PackageNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        openCalculator(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -162,4 +167,60 @@ public class RunningProcessActivity extends AppCompatActivity {
             android.os.Process.killProcess(packageToKill.getpId());
         }
     }
+
+    private static void uninstallApp(Activity activity, String packageName) {
+        Uri packageURI = Uri.parse("package:" + packageName);
+        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
+        activity.startActivity(uninstallIntent);
+    }
+
+    private static void fetchAllInstalledPackages(Activity activity) {
+        final PackageManager pm = activity.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        for (ApplicationInfo packageInfo : packages) {
+            Log.d("RPA", "Installed package :" + packageInfo.packageName);
+            Log.d("RPA", "Source dir : " + packageInfo.sourceDir);
+            Log.d("RPA", "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+        }
+    }
+
+    private static void openCalculator(Activity activity) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_APP_CALCULATOR);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            try {
+                Intent intent = new Intent();
+                intent.setClassName("com.android.calculator2", "com.android.calculator2.Calculator");
+                activity.startActivity(intent);
+            } catch (Exception e1) {
+                ArrayList<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
+
+                final PackageManager pm = activity.getPackageManager();
+                List<PackageInfo> packs = pm.getInstalledPackages(0);
+                for (PackageInfo pi : packs) {
+                    if (pi.packageName.toString().toLowerCase().contains("calcul")) {
+                        HashMap<String, Object> map = new HashMap<String, Object>();
+                        map.put("appName", pi.applicationInfo.loadLabel(pm));
+                        map.put("packageName", pi.packageName);
+                        items.add(map);
+                    }
+                }
+
+                if (items.size() >= 1) {
+                    String packageName = (String) items.get(0).get("packageName");
+                    Intent i = pm.getLaunchIntentForPackage(packageName);
+                    if (i != null)
+                        activity.startActivity(i);
+                } else {
+                    // Application not found
+                }
+            }
+        }
+    }
+
+
 }

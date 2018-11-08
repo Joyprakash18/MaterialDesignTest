@@ -1,6 +1,5 @@
 package com.sayan.sample.materialdesigntest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GridView gridView = findViewById(R.id.grid);
-        String[] buttons = {"TextField", "Test"};
+        String[] buttons = {"TextField", "fetch credentials", "InflaterTest", "Running Process Activity", "Understanding RSA"};
         gridView.setNumColumns(3);
         gridView.setAdapter(new MyGridAdapter(this, buttons));
     }
@@ -63,7 +61,16 @@ public class MainActivity extends AppCompatActivity {
                             toNextPage(TextFieldActivity.class);
                             break;
                         case 1:
-                            toNextPage(Test.class);
+                            toNextPage(FetchCredentials.class);
+                            break;
+                        case 2:
+                            toNextPage(InflaterTest.class);
+                            break;
+                        case 3:
+                            toNextPage(RunningProcessActivity.class);
+                            break;
+                        case 4:
+                            toNextPage(UnderstandingRSA.class);
                             break;
                         default:
                             break;
